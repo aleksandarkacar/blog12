@@ -13,6 +13,10 @@
     <div class="mb-3">
       <input type="password" class="form-control" name="password" placeholder="Password" required>
     </div>
+    <div class="mb-3">
+      <label>IsAdmin?:</label>
+      <input type="checkbox" class="form-Controll" name="isadmin" value="1">
+    </div>
     <button type="submit" class="btn btn-primary">Sign up</button>
 </form>
 

@@ -25,12 +25,16 @@ Route::get('/createpost', function () {
 Route::get('/about', function () {
     return view('about');
 });
-
+Route::get('/deletedPosts', [PostController::class, 'deletedIndex']);
+Route::get('/adminpanel', [PostController::class, 'adminIndex'])->middleware('auth')->middleware('admincheck');
 
 Route::get('/posts', [PostController::class, 'index'])->middleware('auth');
 Route::get('/posts/{id}', [PostController::class, 'show'])->middleware('auth');
+Route::get('/deletePost/{id}', [PostController::class, 'destroy'])->middleware('admincheck');
 
 Route::post('/createpost', [PostController::class, 'store']);
+Route::get('/editpost/{id}', [PostController::class, 'editpost']);
+Route::post('/editpost/{id}', [PostController::class, 'update']);
 Route::post('/createcomment', [CommentController::class, 'store']);
 
 Route::get('signup', [AuthController::class, 'getSignUp']);

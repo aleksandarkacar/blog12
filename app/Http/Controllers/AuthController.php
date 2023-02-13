@@ -21,14 +21,24 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|min:2|max:100|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3|max:255|string'
+            'password' => 'required|min:3|max:255|string',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        if($request->isadmin){
+
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'isadmin' => 1
+            ]);
+        }else{
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
         return redirect('/')->withSuccess('You have signed-in');
     }
